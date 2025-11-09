@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import QuantumCircuit from "./BackGround/QuantumCircuit";
 export default function ScheduleSection({ conferenceData, theme, styles }) {
   return (
     <section id="schedule" className="py-20 px-6 relative overflow-hidden">
