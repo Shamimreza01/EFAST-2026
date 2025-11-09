@@ -12,9 +12,9 @@ export default function Navigation() {
           whileHover={{ scale: 1.05 }}
         >
           <img
-            src="/EFAST-2026-Logo.jpg"
+            src="/EFAST.jpg"
             alt="EFAST 2026 Logo"
-            className="h-8 inline-block mr-2"
+            className="h-10 inline-block mr-2"
           />
           <span
             className={`bg-clip-text text-transparent bg-gradient-to-r ${styles.accentGradient}`}

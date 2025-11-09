@@ -96,9 +96,9 @@ const SciTechConferenceWithTheme = () => {
       transition={{ duration: 0.3 }}
     >
       <img
-        src="/EFAST-2026-Logo.jpg"
+        src="/EFAST_logo.JPG"
         alt="EFAST 2026 Logo"
-        className="h-12 w-12 rounded-full border-2 border-gray-300 shadow-sm"
+        className="h-14 w-14 rounded-full  shadow-sm"
       />
       <div className="flex flex-col">
         <motion.span
@@ -129,9 +129,9 @@ const SciTechConferenceWithTheme = () => {
       transition={{ duration: 0.3 }}
     >
       <img
-        src="/EFAST-2026-Logo.jpg"
+        src="/EFAST_logo.JPG"
         alt="EFAST 2026 Logo"
-        className="h-10 w-10 rounded-full border-2 border-gray-300 shadow-sm"
+        className="h-12 w-12 rounded-full shadow-sm"
       />
       <div className="flex flex-col">
         <motion.span
