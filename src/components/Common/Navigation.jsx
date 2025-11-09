@@ -12,7 +12,7 @@ export default function Navigation() {
           whileHover={{ scale: 1.05 }}
         >
           <img
-            src="/EFAST.jpg"
+            src="/EFAST_logo.JPG"
             alt="EFAST 2026 Logo"
             className="h-10 inline-block mr-2"
           />

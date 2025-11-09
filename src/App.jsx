@@ -16,7 +16,6 @@ import LinkedInIcon from "./components/Icon/LinkedInIcon";
 import MoonIcon from "./components/Icon/MoonIcon";
 import SunIcon from "./components/Icon/SunIcon";
 import TwitterIcon from "./components/Icon/TwitterIcon";
-import ScheduleSection from "./components/ScheduleSection";
 import conferenceData from "./data/data";
 
 const SciTechConferenceWithTheme = () => {
@@ -385,7 +384,7 @@ const SciTechConferenceWithTheme = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Conference <span className={styles.accent}>Highlights</span>
+              Conference <span className={styles.accent}>Scopes</span>
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -408,7 +407,7 @@ const SciTechConferenceWithTheme = () => {
               ))}
             </div>
             {/* Stats */}
-            <motion.div
+            {/* <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -448,24 +447,23 @@ const SciTechConferenceWithTheme = () => {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </motion.div> */}
           </div>
         </section>
 
         {/* Schedule Section */}
-        <ScheduleSection
+        {/* <ScheduleSection
           conferenceData={conferenceData}
           theme={theme}
           styles={styles}
           motion={motion}
-        />
+        /> */}
         <ProfessionalGallery id="gallery" styles={styles} />
         <Map theme={theme} styles={styles} />
 
         {/* Footer */}
         <footer className={`py-12 px-6 border-t relative ${styles.footer}`}>
           <QuantumCircuit />
-          <BinaryRain />
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <motion.div
@@ -475,7 +473,7 @@ const SciTechConferenceWithTheme = () => {
                 viewport={{ once: true }}
               >
                 <img
-                  src="/EFAST-2026-Logo.jpg"
+                  src="/EFAST_logo.JPG"
                   alt="EFAST 2026 Logo"
                   className="h-16 w-16 rounded-full border-2 border-gray-300 mb-3"
                 />

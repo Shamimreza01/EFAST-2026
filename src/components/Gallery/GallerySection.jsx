@@ -1,98 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import galleryImages from "../../data/GalleryImages.js";
 
 const ProfessionalGallery = ({ theme = "light", styles }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [loadedImages, setLoadedImages] = useState({});
   const [activeCategory, setActiveCategory] = useState("all");
-
-  // Gallery images - replace with your actual PUST images
-  const galleryImages = [
-    {
-      id: 1,
-      src: "/pust_ele_rainyNight.jpg",
-      alt: "PUST Electrical Building at Night",
-      category: "campus",
-    },
-    {
-      id: 2,
-      src: "/pust01.jpg",
-      alt: "PUST Campus Aerial View",
-      category: "campus",
-    },
-    {
-      id: 3,
-      src: "/pust02.jpg",
-      alt: "PUST Library Interior",
-      category: "campus",
-    },
-    {
-      id: 4,
-      src: "/pust03.jpg",
-      alt: "Science Fair at PUST",
-      category: "events",
-    },
-    {
-      id: 5,
-      src: "/pust04.jpg",
-      alt: "PUST Conference Room",
-      category: "conference",
-    },
-    {
-      id: 6,
-      src: "/pust05.jpg",
-      alt: "PUST Laboratory",
-      category: "research",
-    },
-    {
-      id: 7,
-      src: "/pust06.jpg",
-      alt: "Student Presentation at PUST",
-      category: "events",
-    },
-    {
-      id: 8,
-      src: "/pust07.jpg",
-      alt: "PUST Auditorium",
-      category: "conference",
-    },
-    {
-      id: 9,
-      src: "/pust08.jpg",
-      alt: "PUST Research Lab",
-      category: "research",
-    },
-    {
-      id: 10,
-      src: "/pust09.jpg",
-      alt: "PUST Conference Hall",
-      category: "conference",
-    },
-    {
-      id: 11,
-      src: "/pust10.jpg",
-      alt: "PUST Outdoor Event",
-      category: "events",
-    },
-    {
-      id: 12,
-      src: "/pust11.jpg",
-      alt: "PUST Campus at Night",
-      category: "campus",
-    },
-    {
-      id: 13,
-      src: "/pust12.jpg",
-      alt: "PUST Research Presentation",
-      category: "research",
-    },
-    {
-      id: 14,
-      src: "/pust13.jpg",
-      alt: "PUST Innovation Lab",
-      category: "research",
-    },
-  ];
 
   const categories = [
     { id: "all", name: "All", count: galleryImages.length },
@@ -101,22 +15,7 @@ const ProfessionalGallery = ({ theme = "light", styles }) => {
       name: "Campus",
       count: galleryImages.filter((img) => img.category === "campus").length,
     },
-    {
-      id: "events",
-      name: "Events",
-      count: galleryImages.filter((img) => img.category === "events").length,
-    },
-    {
-      id: "research",
-      name: "Research",
-      count: galleryImages.filter((img) => img.category === "research").length,
-    },
-    {
-      id: "conference",
-      name: "Conference",
-      count: galleryImages.filter((img) => img.category === "conference")
-        .length,
-    },
+    // ... keep your other categories
   ];
 
   const filteredImages =
@@ -159,10 +58,142 @@ const ProfessionalGallery = ({ theme = "light", styles }) => {
     setSelectedImage(filteredImages[newIndex]);
   };
 
+  // Lightbox Component - This will be rendered outside the main container
+  const Lightbox = () => (
+    <AnimatePresence>
+      {selectedImage && (
+        <motion.div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedImage(null)}
+        >
+          {/* Close Button */}
+          <motion.button
+            className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-all"
+            whileHover={{ scale: 1.1, rotate: 90 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </motion.button>
+
+          {/* Image Counter */}
+          <div className="absolute top-6 left-6 z-10 text-white/80 text-sm">
+            {filteredImages.findIndex((img) => img.id === selectedImage.id) + 1}{" "}
+            / {filteredImages.length}
+          </div>
+
+          {/* Navigation Buttons */}
+          <motion.button
+            className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-all"
+            whileHover={{ scale: 1.1, x: -2 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateImage(-1);
+            }}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </motion.button>
+
+          <motion.button
+            className="absolute right-6 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-all"
+            whileHover={{ scale: 1.1, x: 2 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateImage(1);
+            }}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </motion.button>
+
+          {/* Main Image */}
+          <motion.div
+            className="relative max-w-6xl max-h-full"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <motion.img
+              key={selectedImage.id}
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+
+            {/* Image Info */}
+            <motion.div
+              className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <p className="text-white text-sm">{selectedImage.alt}</p>
+            </motion.div>
+          </motion.div>
+
+          {/* Keyboard Hint */}
+          <motion.div
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/60 text-xs"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Use ← → keys to navigate • ESC to close
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <section id="gallery" className="py-20 px-4 sm:px-6 relative">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white "></div>
+      <div className={`absolute inset-0  ${styles.bg}`}></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -180,7 +211,7 @@ const ProfessionalGallery = ({ theme = "light", styles }) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Conference <span className={styles.accent}>Gallery</span>
+            <span className={styles.accent}>Conference Gallery</span>
           </motion.h2>
           <motion.p
             className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.textSecondary}`}
@@ -308,138 +339,9 @@ const ProfessionalGallery = ({ theme = "light", styles }) => {
         </motion.div>
       </div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-          >
-            {/* Close Button */}
-            <motion.button
-              className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-all"
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setSelectedImage(null)}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </motion.button>
-
-            {/* Image Counter */}
-            <div className="absolute top-6 left-6 z-10 text-white/80 text-sm">
-              {filteredImages.findIndex((img) => img.id === selectedImage.id) +
-                1}{" "}
-              / {filteredImages.length}
-            </div>
-
-            {/* Navigation Buttons */}
-            <motion.button
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-all"
-              whileHover={{ scale: 1.1, x: -2 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={(e) => {
-                e.stopPropagation();
-                navigateImage(-1);
-              }}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </motion.button>
-
-            <motion.button
-              className="absolute right-6 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/20 transition-all"
-              whileHover={{ scale: 1.1, x: 2 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={(e) => {
-                e.stopPropagation();
-                navigateImage(1);
-              }}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </motion.button>
-
-            {/* Main Image */}
-            <motion.div
-              className="relative max-w-6xl max-h-full"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <motion.img
-                key={selectedImage.id}
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="max-w-full max-h-[85vh] object-contain rounded-lg"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-
-              {/* Image Info */}
-              <motion.div
-                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <p className="text-white text-sm">
-                  Image {selectedImage.id} of {galleryImages.length}
-                </p>
-              </motion.div>
-            </motion.div>
-
-            {/* Keyboard Hint */}
-            <motion.div
-              className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/60 text-xs"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              Use ← → keys to navigate • ESC to close
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Render lightbox outside the main container using portal */}
+      {typeof document !== "undefined" &&
+        createPortal(<Lightbox />, document.body)}
     </section>
   );
 };
