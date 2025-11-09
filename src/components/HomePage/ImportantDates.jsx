@@ -27,18 +27,18 @@ export default function ImportantDates({ theme, styles }) {
   };
   return (
     <motion.section
-      className="py-12 md:py-4 px-4 sm:px-6 relative mt-1"
+      className="py-12 md:py-4 px-4 sm:px-2 relative mt-1"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
       viewport={{ once: true }}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-4">
           {importantDates.map((date, index) => (
             <motion.div
               key={date.title}
-              className={`relative rounded-xl p-4 sm:p-6 border-2 shadow-lg transition-all duration-300 min-h-[180px] sm:min-h-[220px] ${
+              className={`relative rounded-xl p-4 sm:p-4 border-2 shadow-lg transition-all duration-300 min-h-[180px] sm:min-h-[210px] ${
                 date.highlight
                   ? theme === "light"
                     ? "border-blue-500 bg-blue-50/50"

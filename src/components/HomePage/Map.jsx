@@ -272,8 +272,8 @@ export default function Map({ theme, styles }) {
             <motion.div
               className={`p-6 rounded-2xl border-2 shadow-lg transition-all duration-300 ${
                 theme === "light"
-                  ? "border-blue-500/30 bg-gradient-to-br from-blue-50 to-indigo-50"
-                  : "border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 to-blue-900/20"
+                  ? "border-blue-500/30 bg-linear-to-br from-blue-50 to-indigo-50"
+                  : "border-cyan-500/30 bg-linear-to-br from-cyan-900/20 to-blue-900/20"
               }`}
               variants={itemVariants}
               whileHover={{

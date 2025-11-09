@@ -61,7 +61,7 @@ const HeroSection = ({ theme, styles }) => {
         ))}
       </div>
       <motion.div
-        className="text-center p-10  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
+        className="text-center p-5  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
         initial={{ opacity: 0, y: 50 }}
         animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 1 }}
@@ -91,7 +91,7 @@ const HeroSection = ({ theme, styles }) => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <span
-            className={`bg-clip-text text-transparent bg-gradient-to-r ${styles.accentGradient}`}
+            className={`bg-clip-text text-transparent bg-linear-to-r ${styles.accentGradient}`}
           >
             {conferenceData.title}
           </span>
