@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import conferenceData from "../../data/data.js";
 import galleryImages from "../../data/GalleryImages.js";
-import ParticleBackground from "../BackGround/ParticleBackground";
 import QuantumCircuit from "../BackGround/QuantumCircuit";
 import ScrollIndicator from "../BackGround/ScrollIndicator.jsx";
 import HandShakeIcon from "../Icon/HandShakeIcon.jsx";
@@ -34,7 +33,7 @@ const HeroSection = ({ theme, styles }) => {
       ref={heroRef}
       className="min-h-screen relative flex  items-center flex-wrap justify-center px-6 overflow-hidden lg:pt-5 pt-20"
     >
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <QuantumCircuit />
       {/* <motion.img
         key={galleryImages[currentImageIndex].id}

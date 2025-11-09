@@ -25,8 +25,8 @@ export default function BinaryRain({ theme }) {
             theme === "light" ? "blue-600" : "cyan-400"
           } text-xs font-mono opacity-75 absolute`}
           style={{ left: element.left }}
-          initial={{ top: "-10px", opacity: 0 }}
-          animate={{ top: "100vh", opacity: [0, 0.3, 0] }}
+          initial={{ y: "-10px", opacity: 0 }}
+          animate={{ y: "100vh", opacity: [0, 0.3, 0] }}
           transition={{
             duration: element.duration,
             repeat: Infinity,
