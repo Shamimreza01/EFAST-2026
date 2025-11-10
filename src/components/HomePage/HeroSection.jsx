@@ -4,6 +4,7 @@ import conferenceData from "../../data/data.js";
 import galleryImages from "../../data/GalleryImages.js";
 import QuantumCircuit from "../BackGround/QuantumCircuit";
 import ScrollIndicator from "../BackGround/ScrollIndicator.jsx";
+import CalendarIcon from "../Icon/CalendarIcon.jsx";
 import HandShakeIcon from "../Icon/HandShakeIcon.jsx";
 import LocationIcon from "../Icon/LocationIcon.jsx";
 import ImportantDates from "./ImportantDates.jsx";
@@ -98,7 +99,12 @@ const HeroSection = ({ theme, styles }) => {
         <p
           className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
         >
-          {conferenceData.date} |{" "}
+          <CalendarIcon className="w-6 h-6 inline-block mr-1" />
+          {conferenceData.date}
+        </p>
+        <p
+          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
+        >
           <span onClick={handleGalleryClick}>
             <LocationIcon className="w-6 h-6 inline-block  mr-1" />
             {conferenceData.location}
