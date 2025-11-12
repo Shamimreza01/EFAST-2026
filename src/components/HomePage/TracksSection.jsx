@@ -27,6 +27,7 @@ function TracksSection({ styles }) {
             whileHover={{ y: -5 }}
             viewport={{ once: true }}
             onClick={() => toggleTrack(index)}
+            title={isExpanded ? "Click to collapse" : "Click to expand"}
           >
             {/* Always visible: Icon and Title */}
             <div className="flex items-center gap-4">
