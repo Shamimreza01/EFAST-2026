@@ -399,7 +399,7 @@ const SciTechConferenceWithTheme = () => {
             </motion.div>
 
             {/* Organized By Section */}
-            <motion.div
+            {/* <motion.div
               className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -418,14 +418,14 @@ const SciTechConferenceWithTheme = () => {
                 </div>
               </div>
 
-              {/* Conference Mode */}
+              
               <div className="text-center md:text-right">
                 <h3 className="text-2xl font-semibold mb-4">Conference Mode</h3>
                 <p className={`text-lg ${styles.textSecondary}`}>
                   {confData.conference.mode}
                 </p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </section>
 
