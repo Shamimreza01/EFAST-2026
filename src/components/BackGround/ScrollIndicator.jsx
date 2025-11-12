@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 export default function ScrollIndicator({ theme, styles }) {
   return (
     <motion.div
-      className="absolute bottom-8 hidden md:block left-1/2 transform -translate-x-1/2"
+      className="absolute bottom-12 hidden md:block left-1/2 transform -translate-x-1/2"
       animate={{ y: [0, 10, 0] }}
       transition={{ duration: 2, repeat: Infinity }}
     >

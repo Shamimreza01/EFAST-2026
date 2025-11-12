@@ -8,8 +8,16 @@ const importantDates = [
     description: "Submit your research abstract",
   },
   {
+    title: "Early Bird Registration",
+    date: "June 14, 2026",
+    status: "Open Soon",
+    icon: "🎯",
+    highlight: true,
+    description: "Get discounted registration rates",
+  },
+  {
     title: "Full Paper Deadline",
-    date: "comming soon...",
+    date: "June 21, 2026",
     status: "Upcoming",
     icon: "📄",
     highlight: false,
@@ -17,19 +25,11 @@ const importantDates = [
   },
   {
     title: "Acceptance Notification",
-    date: "May 01, 2026",
+    date: "May 31, 2026",
     status: "Pending",
     icon: "✅",
     highlight: false,
     description: "Review results announced",
-  },
-  {
-    title: "Early Bird Registration",
-    date: "June 14, 2026",
-    status: "Open Soon",
-    icon: "🎯",
-    highlight: true,
-    description: "Get discounted registration rates",
   },
 ];
 export default importantDates;

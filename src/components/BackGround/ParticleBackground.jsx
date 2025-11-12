@@ -19,7 +19,7 @@ export default function ParticleBackground() {
   const [isDark] = useContext(ThemeContext);
   const theme = isDark ? "dark" : "light";
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden hidden sm:block">
       <svg
         className="w-full h-full"
         viewBox="0 0 100 100"

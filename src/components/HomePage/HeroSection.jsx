@@ -1,16 +1,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import conferenceData from "../../data/data.js";
+import confData from "../../data/confData.js";
+// import conferenceData from "../../data/data.js";
 import galleryImages from "../../data/GalleryImages.js";
+import ParticleBackground from "../BackGround/ParticleBackground.jsx";
 import QuantumCircuit from "../BackGround/QuantumCircuit";
 import ScrollIndicator from "../BackGround/ScrollIndicator.jsx";
-import CalendarIcon from "../Icon/CalendarIcon.jsx";
-import HandShakeIcon from "../Icon/HandShakeIcon.jsx";
-import LocationIcon from "../Icon/LocationIcon.jsx";
+import ActionButtons from "./ActionButtons.jsx";
+import DateAndMode from "./DateAndMode.jsx";
 import ImportantDates from "./ImportantDates.jsx";
+import OrganizedBy from "./OrganizedBy.jsx";
+
 const HeroSection = ({ theme, styles }) => {
+  console.log(confData);
   const heroRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
+  const conferenceData = confData.conference;
   // const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // useEffect(() => {
@@ -34,7 +39,7 @@ const HeroSection = ({ theme, styles }) => {
       ref={heroRef}
       className="min-h-screen relative flex  items-center flex-wrap justify-center px-6 overflow-hidden lg:pt-5 pt-20"
     >
-      {/* <ParticleBackground /> */}
+      <ParticleBackground />
       <QuantumCircuit />
       {/* <motion.img
         key={galleryImages[currentImageIndex].id}
@@ -61,7 +66,7 @@ const HeroSection = ({ theme, styles }) => {
         ))}
       </div>
       <motion.div
-        className="text-center p-5  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
+        className="text-center p-3  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
         initial={{ opacity: 0, y: 50 }}
         animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 1 }}
@@ -72,7 +77,7 @@ const HeroSection = ({ theme, styles }) => {
           animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          {conferenceData.subtitle}
+          {conferenceData.name}
         </motion.p>
         {/* <motion.img
           src="/EFAST_logo.png"
@@ -93,64 +98,27 @@ const HeroSection = ({ theme, styles }) => {
           <span
             className={`bg-clip-text text-transparent bg-linear-to-r ${styles.accentGradient}`}
           >
-            {conferenceData.title}
+            {conferenceData.short_name}
           </span>
         </motion.h1>
-        <p
-          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
-        >
-          <CalendarIcon className="w-6 h-6 inline-block mr-1" />
-          {conferenceData.date}
-        </p>
-        <p
-          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
-        >
-          <span onClick={handleGalleryClick}>
-            <LocationIcon className="w-6 h-6 inline-block  mr-1" />
-            {conferenceData.location}
-          </span>
-        </p>
-        <p className={`text-lg md:text-xl ${styles.textSecondary}`}>and</p>
-        <p
-          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
-        >
-          <HandShakeIcon className="w-6 h-6 inline-block mr-1" />{" "}
-          {conferenceData.location2}
-        </p>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
-        >
-          <motion.button
-            className={`px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition-all ${styles.buttonPrimary}`}
-            whileHover={{
-              scale: 1.05,
-              boxShadow:
-                theme === "light"
-                  ? "0 10px 30px rgba(0, 102, 204, 0.4)"
-                  : "0 10px 30px rgba(6, 182, 212, 0.4)",
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Register Now
-          </motion.button>
 
-          <motion.button
-            className={`px-8 py-3 rounded-full font-semibold text-lg backdrop-blur-sm transition-all ${styles.buttonSecondary}`}
-            whileHover={{
-              scale: 1.05,
-              backgroundColor:
-                theme === "light"
-                  ? "rgba(0, 102, 204, 0.1)"
-                  : "rgba(6, 182, 212, 0.1)",
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View Schedule
-          </motion.button>
-        </motion.div>
+        <DateAndMode
+          conferenceData={conferenceData}
+          styles={styles}
+          theme={theme}
+          isHeroInView={isHeroInView}
+        />
+        <OrganizedBy
+          theme={theme}
+          styles={styles}
+          isHeroInView={isHeroInView}
+          handleGalleryClick={handleGalleryClick}
+        />
+        <ActionButtons
+          theme={theme}
+          styles={styles}
+          isHeroInView={isHeroInView}
+        />
       </motion.div>
 
       {/* Important Dates Section */}

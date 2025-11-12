@@ -11,11 +11,13 @@ import QuantumCircuit from "./components/BackGround/QuantumCircuit";
 import ProfessionalGallery from "./components/Gallery/GallerySection";
 import HeroSection from "./components/HomePage/HeroSection";
 import Map from "./components/HomePage/Map";
+import TracksSection from "./components/HomePage/TracksSection";
 import FacebookIcon from "./components/Icon/FacebookIcon";
 import LinkedInIcon from "./components/Icon/LinkedInIcon";
 import MoonIcon from "./components/Icon/MoonIcon";
 import SunIcon from "./components/Icon/SunIcon";
 import TwitterIcon from "./components/Icon/TwitterIcon";
+import confData from "./data/confData";
 import conferenceData from "./data/data";
 
 const SciTechConferenceWithTheme = () => {
@@ -58,6 +60,7 @@ const SciTechConferenceWithTheme = () => {
       nav: "bg-white/80 backdrop-blur-md border-blue-200",
       text: "text-gray-800",
       textSecondary: "text-[#6a0000]",
+      textParagraph: "text-gray-600",
       card: "bg-white/70 backdrop-blur-lg border-blue-200",
       cardHover: "bg-white/90",
       buttonPrimary: "bg-gradient-to-r from-blue-500 to-purple-600 text-white",
@@ -73,6 +76,7 @@ const SciTechConferenceWithTheme = () => {
       nav: "bg-gray-900/80 backdrop-blur-md border-cyan-500/20",
       text: "text-white",
       textSecondary: "text-gray-300",
+      textParagraph: "text-gray-400",
       card: "bg-gray-800/50 backdrop-blur-lg border-cyan-500/20",
       cardHover: "bg-gray-800/70",
       buttonPrimary: "bg-gradient-to-r from-cyan-500 to-blue-600 text-white",
@@ -235,7 +239,7 @@ const SciTechConferenceWithTheme = () => {
                 href="#submit-paper"
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${styles.buttonPrimary}`}
               >
-                Submit Paper
+                Abstract Submission
               </a>
             </div>
             <div className="flex items-center gap-4">
@@ -252,7 +256,7 @@ const SciTechConferenceWithTheme = () => {
                 <TwitterIcon className="w-6 h-6" />
               </a>
               <a
-                href="https://facebook.com/yourprofile"
+                href={confData.conference.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full ${
@@ -355,7 +359,7 @@ const SciTechConferenceWithTheme = () => {
                 className={`inline-flex px-4 py-2 rounded-full text-sm font-semibold ${styles.buttonPrimary}`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Submit Paper
+                Abstract Submission
               </a>
             </div>
           </motion.div>
@@ -374,7 +378,58 @@ const SciTechConferenceWithTheme = () => {
         <BinaryRain />
         <HeroSection theme={theme} styles={styles} />
 
-        <section id="about" className="py-20 px-6 relative overflow-hidden">
+        {/* NEW OVERVIEW SECTION */}
+        <section id="overview" className="py-16 px-6 relative">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Conference <span className={styles.accent}>Overview</span>
+              </h2>
+              <p
+                className={`text-lg md:text-xl ${styles.textParagraph} leading-relaxed max-w-4xl mx-auto`}
+              >
+                {confData.conference.overview}
+              </p>
+            </motion.div>
+
+            {/* Organized By Section */}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-center md:text-left">
+                <h3 className="text-2xl font-semibold mb-4">Organized By</h3>
+                <div className="space-y-3">
+                  {confData.conference.organized_by.map((org, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className={styles.textSecondary}>{org}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Conference Mode */}
+              <div className="text-center md:text-right">
+                <h3 className="text-2xl font-semibold mb-4">Conference Mode</h3>
+                <p className={`text-lg ${styles.textSecondary}`}>
+                  {confData.conference.mode}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="scopes" className="py-20 px-6 relative overflow-hidden">
           <QuantumCircuit />
           <div className="max-w-7xl mx-auto">
             <motion.h2
@@ -386,26 +441,12 @@ const SciTechConferenceWithTheme = () => {
             >
               Conference <span className={styles.accent}>Scopes</span>
             </motion.h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {conferenceData.highlights.map((highlight, index) => (
-                <motion.div
-                  key={highlight.title}
-                  className={`rounded-xl p-6 border shadow-sm hover:shadow-md transition-all duration-300 ${styles.card}`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="text-4xl mb-4">{highlight.icon}</div>
-                  <h3 className={`text-xl font-semibold mb-2 ${styles.accent}`}>
-                    {highlight.title}
-                  </h3>
-                  <p className={styles.textSecondary}>{highlight.desc}</p>
-                </motion.div>
-              ))}
-            </div>
+            <p
+              className={`text-lg md:text-xl ${styles.textParagraph} leading-relaxed max-w-4xl mx-auto mb-7`}
+            >
+              {confData.conference.trackstitle}
+            </p>
+            <TracksSection styles={styles} />
             {/* Stats */}
             {/* <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
