@@ -7,7 +7,7 @@ const confData = {
     mode: "Hybrid (In-person at PUST, Bangladesh; In-person at UniMAP, Malaysia; and Online)",
     website: "",
     facebook: "https://www.facebook.com/share/g/19rapZGteG/?mibextid=wwXIfr",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/company/efast2026/",
     overview:
       "The organizing committee of EFAST 2026 cordially invites researchers, academics and scientists to submit their original research works for the International Conference on Emerging Frontiers in Advanced Sciences and Technologies 2026 (EFAST 2026).EFAST 2026 aims to provide a premier interdisciplinary platform for a diverse group of professions to present and discuss the most recent innovations, trends, and challenges, as well as practical solutions adopted in the fields of Advanced Sciences and Technologies. This conference is a collaborative effort to foster networking, share knowledge, and promote future research collaborations between Bangladesh, Malaysia and the global academic community.",
     organized_by: [

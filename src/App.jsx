@@ -244,7 +244,7 @@ const SciTechConferenceWithTheme = () => {
             </div>
             <div className="flex items-center gap-4">
               <a
-                href="https://twitter.com/yourprofile"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full ${
@@ -268,7 +268,7 @@ const SciTechConferenceWithTheme = () => {
                 <FacebookIcon className="w-6 h-6" />
               </a>
               <a
-                href="https://linkedin.com/in/yourprofile"
+                href={confData.conference.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full ${
@@ -379,53 +379,270 @@ const SciTechConferenceWithTheme = () => {
         <HeroSection theme={theme} styles={styles} />
 
         {/* NEW OVERVIEW SECTION */}
-        <section id="overview" className="py-16 px-6 relative">
+        <section id="overview" className="py-20 px-6 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-10 w-32 h-32 border-2 border-blue-500 rounded-full"></div>
+            <div className="absolute bottom-32 right-20 w-24 h-24 border-2 border-purple-500 rotate-45"></div>
+            <div className="absolute top-1/2 left-1/3 w-20 h-20 border-2 border-cyan-500 rounded-lg"></div>
+          </div>
+
           <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
             <motion.div
-              className="text-center mb-12"
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Conference <span className={styles.accent}>Overview</span>
-              </h2>
-              <p
-                className={`text-lg md:text-xl ${styles.textParagraph} leading-relaxed max-w-4xl mx-auto`}
+              <motion.h2
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
-                {confData.conference.overview}
-              </p>
+                Conference <span className={styles.accent}>Overview</span>
+              </motion.h2>
+              <motion.div
+                className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"
+                initial={{ width: 0 }}
+                whileInView={{ width: 96 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              />
+              <motion.p
+                className={`text-xl md:text-2xl ${styles.textSecondary} max-w-3xl mx-auto`}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Discover the Premier Platform for Advanced Sciences &
+                Technologies
+              </motion.p>
             </motion.div>
 
-            {/* Organized By Section */}
-            {/* <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-center md:text-left">
-                <h3 className="text-2xl font-semibold mb-4">Organized By</h3>
-                <div className="space-y-3">
-                  {confData.conference.organized_by.map((org, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className={styles.textSecondary}>{org}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* Main Content Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+              {/* Overview Text - Main Content */}
+              <motion.div
+                className="lg:col-span-2"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className={`relative p-8 rounded-2xl backdrop-blur-sm border ${
+                    theme === "light"
+                      ? "bg-white/80 border-blue-200 shadow-xl"
+                      : "bg-gray-900/80 border-cyan-500/20 shadow-2xl"
+                  }`}
+                >
+                  {/* Decorative Corner */}
+                  <div
+                    className={`absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 ${
+                      theme === "light" ? "border-blue-500" : "border-cyan-400"
+                    }`}
+                  />
+                  <div
+                    className={`absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 ${
+                      theme === "light" ? "border-blue-500" : "border-cyan-400"
+                    }`}
+                  />
 
-              
-              <div className="text-center md:text-right">
-                <h3 className="text-2xl font-semibold mb-4">Conference Mode</h3>
-                <p className={`text-lg ${styles.textSecondary}`}>
-                  {confData.conference.mode}
-                </p>
-              </div>
-            </motion.div> */}
+                  <p
+                    className={`text-lg md:text-xl leading-relaxed ${styles.textParagraph} 
+            first-letter:text-7xl first-letter:font-bold first-letter:float-left 
+            first-letter:mr-4 first-letter:mt-2 first-letter:leading-none
+            first-letter:bg-gradient-to-r first-letter:bg-clip-text first-letter:text-transparent
+            first-letter:from-blue-600 first-letter:to-purple-600`}
+                  >
+                    {confData.conference.overview}
+                  </p>
+
+                  {/* Stats Bar */}
+                  <motion.div
+                    className="mt-8 pt-6 border-t border-gray-300 dark:border-gray-600"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      {[
+                        { number: "50+", label: "Expert Speakers" },
+                        { number: "200+", label: "Research Papers" },
+                        { number: "8", label: "Technical Tracks" },
+                      ].map((stat, index) => (
+                        <div key={index} className="text-center">
+                          <div
+                            className={`text-2xl md:text-3xl font-bold ${styles.accent}`}
+                          >
+                            {stat.number}
+                          </div>
+                          <div
+                            className={`text-sm ${styles.textSecondary} mt-1`}
+                          >
+                            {stat.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Sidebar - Organized By & Conference Mode */}
+              <motion.div
+                className="space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                {/* Organized By Card */}
+                <motion.div
+                  className={`p-6 rounded-2xl backdrop-blur-sm border ${
+                    theme === "light"
+                      ? "bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 shadow-lg"
+                      : "bg-gradient-to-br from-blue-900/20 to-indigo-900/20 border-cyan-500/20 shadow-xl"
+                  }`}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex items-center mb-4">
+                    <div
+                      className={`p-3 rounded-xl mr-4 ${
+                        theme === "light"
+                          ? "bg-blue-100 text-blue-600"
+                          : "bg-cyan-500/20 text-cyan-400"
+                      }`}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className={`text-2xl font-bold ${styles.accent}`}>
+                      Organized By
+                    </h3>
+                  </div>
+
+                  <div className="space-y-2">
+                    {confData.conference.organized_by.map((org, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-center space-x-4 p-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-800/50 transition-colors"
+                        whileHover={{ x: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div
+                          className={`w-3 h-3 rounded-full ${
+                            theme === "light" ? "bg-blue-500" : "bg-cyan-400"
+                          }`}
+                        />
+                        <span className={`font-medium ${styles.textSecondary}`}>
+                          {org}
+                        </span>
+                      </motion.div>
+                    ))}
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                        <span className="flex items-center space-x-1">
+                          <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                          <span>In-person (PUST)</span>
+                        </span>
+                        <span className="flex items-center space-x-1">
+                          <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                          <span>In-person (UniMAP)</span>
+                        </span>
+                        <span className="flex items-center space-x-1">
+                          <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                          <span>Online</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Quick Facts */}
+                <motion.div
+                  className={`p-6 rounded-2xl backdrop-blur-sm border ${
+                    theme === "light"
+                      ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg"
+                      : "bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/20 shadow-xl"
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex items-center mb-4">
+                    <div
+                      className={`p-3 rounded-xl mr-4 ${
+                        theme === "light"
+                          ? "bg-green-100 text-green-600"
+                          : "bg-green-500/20 text-green-400"
+                      }`}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className={`text-2xl font-bold ${styles.accent}`}>
+                      Quick Facts
+                    </h3>
+                  </div>
+
+                  <div className="space-y-3">
+                    {[
+                      "ISBN Conference Proceedings",
+                      "Scopus/SCI Journal Opportunities",
+                      "Bangladesh-Malaysia Collaboration",
+                      "Global Research Network",
+                      "Interdisciplinary Sciences Platform",
+                      "Peer-Reviewed Publications",
+                      "Innovation & Technology Focus",
+                      "International Academic Partnerships",
+                    ].map((fact, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <svg
+                          className={`w-4 h-4 ${styles.accent}`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className={styles.textSecondary}>{fact}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
