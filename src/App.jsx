@@ -100,7 +100,7 @@ const SciTechConferenceWithTheme = () => {
         alt="EFAST 2026 Logo"
         className="h-14 w-14 rounded-full  shadow-sm"
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         <motion.span
           className={`text-lg font-bold tracking-wider ${styles.text}`}
           initial={{ opacity: 0, x: -20 }}
