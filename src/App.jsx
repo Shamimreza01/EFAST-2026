@@ -17,12 +17,12 @@ import LinkedInIcon from "./components/Icon/LinkedInIcon";
 import MoonIcon from "./components/Icon/MoonIcon";
 import SunIcon from "./components/Icon/SunIcon";
 import TwitterIcon from "./components/Icon/TwitterIcon";
-import confData from "./data/confData";
 import conferenceData from "./data/data";
 
 const SciTechConferenceWithTheme = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [expandedTrack, setExpandedTrack] = useState(null);
   const [theme, setTheme] = useState(
     localStorage.getItem("conference-theme") || "light"
   );
@@ -47,9 +47,10 @@ const SciTechConferenceWithTheme = () => {
     "Home",
     "Scopes",
     "Speakers",
+    "Committee",
     "Schedule",
     "Venue",
-    "Call For Paper",
+    "Call For Papers",
     "Register",
   ];
 
@@ -103,14 +104,14 @@ const SciTechConferenceWithTheme = () => {
         alt="EFAST 2026 Logo"
         className="h-14 w-14 rounded-full  shadow-sm"
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         <motion.span
           className={`text-lg font-bold tracking-wider ${styles.text}`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          {conferenceData.title}
+          {confData.conference.short_name}
         </motion.span>
         <motion.span
           className={`text-xs font-medium tracking-wide ${styles.textSecondary} mt-1`}
@@ -157,48 +158,51 @@ const SciTechConferenceWithTheme = () => {
     </motion.div>
   );
 
-  const Navigation = () => (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-60 py-3 px-6 border-b ${styles.nav}`}
-      initial={{ y: -72, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      role="navigation"
-      aria-label="Primary"
-    >
-      {/* Top progress bar */}
-      <motion.div
-        className="absolute top-0 left-0 h-0.5 origin-left"
-        style={{ scaleX: scrollYProgress, background: progressColor }}
-      />
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="hidden md:block">
-          <UniversityLogoWithText />
-        </div>
-        <div className="md:hidden">
-          <MobileUniversityLogo />
-        </div>
+  const Navigation = () => {
+    const [speakersOpen, setSpeakersOpen] = useState(false);
+    const [committeeOpen, setCommitteeOpen] = useState(false);
+    const [mobileSpeakersOpen, setMobileSpeakersOpen] = useState(false);
+    const [mobileCommitteeOpen, setMobileCommitteeOpen] = useState(false);
 
-        <div className="flex items-center gap-3 md:gap-6">
-          {/* Submit Paper CTA on desktop */}
+    return (
+      <motion.nav
+        className={`fixed top-0 left-0 right-0 z-60 py-3 px-2 border-b ${styles.nav}`}
+        initial={{ y: -72, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        role="navigation"
+        aria-label="Primary"
+      >
+        {/* Top progress bar */}
+        <motion.div
+          className="absolute top-0 left-0 h-0.5 origin-left"
+          style={{ scaleX: scrollYProgress, background: progressColor }}
+        />
+        <div className="max-w-full mx-auto flex justify-between items-center">
+          <div className="hidden md:block">
+            <UniversityLogoWithText />
+          </div>
+          <div className="md:hidden">
+            <MobileUniversityLogo />
+          </div>
 
-          {/* Theme Toggle */}
-          <motion.button
-            onClick={toggleTheme}
-            className={`p-2 rounded-full ${
-              theme === "light"
-                ? "bg-blue-100 text-blue-600"
-                : "bg-gray-800 text-cyan-300"
-            }`}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.94 }}
-            aria-label={`Switch to ${
-              theme === "light" ? "dark" : "light"
-            } mode`}
-          >
-            {theme === "light" ? <MoonIcon /> : <SunIcon />}
-          </motion.button>
-          {/* Add social media icon and links */}
+          <div className="flex items-center gap-3 md:gap-6">
+            {/* Theme Toggle */}
+            <motion.button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full ${
+                theme === "light"
+                  ? "bg-blue-100 text-blue-600"
+                  : "bg-gray-800 text-cyan-300"
+              }`}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.94 }}
+              aria-label={`Switch to ${
+                theme === "light" ? "dark" : "light"
+              } mode`}
+            >
+              {theme === "light" ? <MoonIcon /> : <SunIcon />}
+            </motion.button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
@@ -239,12 +243,12 @@ const SciTechConferenceWithTheme = () => {
                 href="#submit-paper"
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${styles.buttonPrimary}`}
               >
-                Abstract Submission
+                Submit Paper
               </a>
             </div>
             <div className="flex items-center gap-4">
               <a
-                href="#"
+                href="https://twitter.com/yourprofile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full ${
@@ -256,7 +260,7 @@ const SciTechConferenceWithTheme = () => {
                 <TwitterIcon className="w-6 h-6" />
               </a>
               <a
-                href={confData.conference.facebook}
+                href="https://facebook.com/yourprofile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full ${
@@ -268,7 +272,7 @@ const SciTechConferenceWithTheme = () => {
                 <FacebookIcon className="w-6 h-6" />
               </a>
               <a
-                href={confData.conference.linkedin}
+                href="https://linkedin.com/in/yourprofile"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-2 rounded-full ${
@@ -282,38 +286,40 @@ const SciTechConferenceWithTheme = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden flex flex-col w-7 h-7 justify-between items-center"
-            onClick={() => setIsMenuOpen((v) => !v)}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <motion.span
-              className={`w-full h-0.5 block rounded ${
-                theme === "light" ? "bg-gray-700" : "bg-white"
-              }`}
-              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            />
-            <motion.span
-              className={`w-full h-0.5 block rounded ${
-                theme === "light" ? "bg-gray-700" : "bg-white"
-              }`}
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-            />
-            <motion.span
-              className={`w-full h-0.5 block rounded ${
-                theme === "light" ? "bg-gray-700" : "bg-white"
-              }`}
-              animate={
-                isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
-              }
-            />
-          </motion.button>
+            {/* Mobile Menu Button */}
+            <motion.button
+              className="md:hidden flex flex-col w-7 h-7 justify-between items-center"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <motion.span
+                className={`w-full h-0.5 block rounded ${
+                  theme === "light" ? "bg-gray-700" : "bg-white"
+                }`}
+                animate={
+                  isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }
+                }
+              />
+              <motion.span
+                className={`w-full h-0.5 block rounded ${
+                  theme === "light" ? "bg-gray-700" : "bg-white"
+                }`}
+                animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+              />
+              <motion.span
+                className={`w-full h-0.5 block rounded ${
+                  theme === "light" ? "bg-gray-700" : "bg-white"
+                }`}
+                animate={
+                  isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
+                }
+              />
+            </motion.button>
+          </div>
         </div>
-      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -359,7 +365,7 @@ const SciTechConferenceWithTheme = () => {
                 className={`inline-flex px-4 py-2 rounded-full text-sm font-semibold ${styles.buttonPrimary}`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Abstract Submission
+                Submit Paper
               </a>
             </div>
           </motion.div>
@@ -378,275 +384,7 @@ const SciTechConferenceWithTheme = () => {
         <BinaryRain />
         <HeroSection theme={theme} styles={styles} />
 
-        {/* NEW OVERVIEW SECTION */}
-        <section id="overview" className="py-20 px-6 relative overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 left-10 w-32 h-32 border-2 border-blue-500 rounded-full"></div>
-            <div className="absolute bottom-32 right-20 w-24 h-24 border-2 border-purple-500 rotate-45"></div>
-            <div className="absolute top-1/2 left-1/3 w-20 h-20 border-2 border-cyan-500 rounded-lg"></div>
-          </div>
-
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <motion.h2
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Conference <span className={styles.accent}>Overview</span>
-              </motion.h2>
-              <motion.div
-                className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"
-                initial={{ width: 0 }}
-                whileInView={{ width: 96 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              />
-              <motion.p
-                className={`text-xl md:text-2xl ${styles.textSecondary} max-w-3xl mx-auto`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                Discover the Premier Platform for Advanced Sciences &
-                Technologies
-              </motion.p>
-            </motion.div>
-
-            {/* Main Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-              {/* Overview Text - Main Content */}
-              <motion.div
-                className="lg:col-span-2"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <div
-                  className={`relative p-8 rounded-2xl backdrop-blur-sm border ${
-                    theme === "light"
-                      ? "bg-white/80 border-blue-200 shadow-xl"
-                      : "bg-gray-900/80 border-cyan-500/20 shadow-2xl"
-                  }`}
-                >
-                  {/* Decorative Corner */}
-                  <div
-                    className={`absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 ${
-                      theme === "light" ? "border-blue-500" : "border-cyan-400"
-                    }`}
-                  />
-                  <div
-                    className={`absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 ${
-                      theme === "light" ? "border-blue-500" : "border-cyan-400"
-                    }`}
-                  />
-
-                  <p
-                    className={`text-lg md:text-xl leading-relaxed ${styles.textParagraph} 
-            first-letter:text-7xl first-letter:font-bold first-letter:float-left 
-            first-letter:mr-4 first-letter:mt-2 first-letter:leading-none
-            first-letter:bg-gradient-to-r first-letter:bg-clip-text first-letter:text-transparent
-            first-letter:from-blue-600 first-letter:to-purple-600`}
-                  >
-                    {confData.conference.overview}
-                  </p>
-
-                  {/* Stats Bar */}
-                  <motion.div
-                    className="mt-8 pt-6 border-t border-gray-300 dark:border-gray-600"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      {[
-                        { number: "50+", label: "Expert Speakers" },
-                        { number: "200+", label: "Research Papers" },
-                        { number: "8", label: "Technical Tracks" },
-                      ].map((stat, index) => (
-                        <div key={index} className="text-center">
-                          <div
-                            className={`text-2xl md:text-3xl font-bold ${styles.accent}`}
-                          >
-                            {stat.number}
-                          </div>
-                          <div
-                            className={`text-sm ${styles.textSecondary} mt-1`}
-                          >
-                            {stat.label}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-
-              {/* Sidebar - Organized By & Conference Mode */}
-              <motion.div
-                className="space-y-8"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                viewport={{ once: true }}
-              >
-                {/* Organized By Card */}
-                <motion.div
-                  className={`p-6 rounded-2xl backdrop-blur-sm border ${
-                    theme === "light"
-                      ? "bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 shadow-lg"
-                      : "bg-gradient-to-br from-blue-900/20 to-indigo-900/20 border-cyan-500/20 shadow-xl"
-                  }`}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="flex items-center mb-4">
-                    <div
-                      className={`p-3 rounded-xl mr-4 ${
-                        theme === "light"
-                          ? "bg-blue-100 text-blue-600"
-                          : "bg-cyan-500/20 text-cyan-400"
-                      }`}
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className={`text-2xl font-bold ${styles.accent}`}>
-                      Organized By
-                    </h3>
-                  </div>
-
-                  <div className="space-y-2">
-                    {confData.conference.organized_by.map((org, index) => (
-                      <motion.div
-                        key={index}
-                        className="flex items-center space-x-4 p-2 rounded-lg hover:bg-white/50 dark:hover:bg-gray-800/50 transition-colors"
-                        whileHover={{ x: 5 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div
-                          className={`w-3 h-3 rounded-full ${
-                            theme === "light" ? "bg-blue-500" : "bg-cyan-400"
-                          }`}
-                        />
-                        <span className={`font-medium ${styles.textSecondary}`}>
-                          {org}
-                        </span>
-                      </motion.div>
-                    ))}
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        <span className="flex items-center space-x-1">
-                          <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                          <span>In-person (PUST)</span>
-                        </span>
-                        <span className="flex items-center space-x-1">
-                          <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                          <span>In-person (UniMAP)</span>
-                        </span>
-                        <span className="flex items-center space-x-1">
-                          <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                          <span>Online</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Quick Facts */}
-                <motion.div
-                  className={`p-6 rounded-2xl backdrop-blur-sm border ${
-                    theme === "light"
-                      ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-lg"
-                      : "bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/20 shadow-xl"
-                  }`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="flex items-center mb-4">
-                    <div
-                      className={`p-3 rounded-xl mr-4 ${
-                        theme === "light"
-                          ? "bg-green-100 text-green-600"
-                          : "bg-green-500/20 text-green-400"
-                      }`}
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 10V3L4 14h7v7l9-11h-7z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className={`text-2xl font-bold ${styles.accent}`}>
-                      Quick Facts
-                    </h3>
-                  </div>
-
-                  <div className="space-y-3">
-                    {[
-                      "ISBN Conference Proceedings",
-                      "Scopus/SCI Journal Opportunities",
-                      "Bangladesh-Malaysia Collaboration",
-                      "Global Research Network",
-                      "Interdisciplinary Sciences Platform",
-                      "Peer-Reviewed Publications",
-                      "Innovation & Technology Focus",
-                      "International Academic Partnerships",
-                    ].map((fact, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <svg
-                          className={`w-4 h-4 ${styles.accent}`}
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        <span className={styles.textSecondary}>{fact}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        <section id="scopes" className="py-20 px-6 relative overflow-hidden">
+        <section id="about" className="py-20 px-6 relative overflow-hidden">
           <QuantumCircuit />
           <div className="max-w-7xl mx-auto">
             <motion.h2
@@ -658,12 +396,26 @@ const SciTechConferenceWithTheme = () => {
             >
               Conference <span className={styles.accent}>Scopes</span>
             </motion.h2>
-            <p
-              className={`text-lg md:text-xl ${styles.textParagraph} leading-relaxed max-w-4xl mx-auto mb-7`}
-            >
-              {confData.conference.trackstitle}
-            </p>
-            <TracksSection styles={styles} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {conferenceData.highlights.map((highlight, index) => (
+                <motion.div
+                  key={highlight.title}
+                  className={`rounded-xl p-6 border shadow-sm hover:shadow-md transition-all duration-300 ${styles.card}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -10 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-4xl mb-4">{highlight.icon}</div>
+                  <h3 className={`text-xl font-semibold mb-2 ${styles.accent}`}>
+                    {highlight.title}
+                  </h3>
+                  <p className={styles.textSecondary}>{highlight.desc}</p>
+                </motion.div>
+              ))}
+            </div>
             {/* Stats */}
             {/* <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
@@ -703,9 +455,95 @@ const SciTechConferenceWithTheme = () => {
                   >
                     {stat.label}
                   </div>
+
+                  {/* Subtracks List */}
+                  <AnimatePresence>
+                    {expandedTrack === index && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`border-t ${
+                          theme === "light"
+                            ? "border-blue-100"
+                            : "border-gray-700"
+                        }`}
+                      >
+                        <div className="p-6 pt-4">
+                          <h4
+                            className={`font-semibold mb-4 text-sm uppercase tracking-wide ${styles.accent}`}
+                          >
+                            Topics Covered
+                          </h4>
+                          <motion.ul
+                            className="space-y-3"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            {track.topics.map((topic, topicIndex) => (
+                              <motion.li
+                                key={topic}
+                                className={`flex items-start text-sm ${
+                                  theme === "light"
+                                    ? "text-gray-700"
+                                    : "text-gray-300"
+                                }`}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{
+                                  duration: 0.4,
+                                  delay: 0.3 + topicIndex * 0.05,
+                                }}
+                              >
+                                <span
+                                  className={`mr-3 mt-1 flex-shrink-0 ${
+                                    theme === "light"
+                                      ? "text-blue-500"
+                                      : "text-cyan-400"
+                                  }`}
+                                >
+                                  •
+                                </span>
+                                <span>{topic}</span>
+                              </motion.li>
+                            ))}
+                          </motion.ul>
+
+                          {/* View Details Button */}
+                          {/* <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            className="mt-6 pt-4 border-t border-dashed border-gray-300 dark:border-gray-600"
+                          >
+                            <button
+                              className={`w-full py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                                theme === "light"
+                                  ? "bg-blue-50 text-blue-600 hover:bg-blue-100"
+                                  : "bg-gray-700 text-cyan-400 hover:bg-gray-600"
+                              }`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // You can add functionality to navigate to detailed track page
+                                console.log(
+                                  `View details for ${track.track_title}`
+                                );
+                              }}
+                            >
+                              View Track Details
+                            </button>
+                          </motion.div> */}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
-            </motion.div> */}
+            </div>
+
+            {/* Expanded View Instructions */}
           </div>
         </section>
 
@@ -738,7 +576,7 @@ const SciTechConferenceWithTheme = () => {
                 <span
                   className={`bg-clip-text text-transparent bg-liner-to-r ${styles.accentGradient} text-xl font-bold mb-1`}
                 >
-                  {conferenceData.title}
+                  {confData.conference.name}
                 </span>
                 <span
                   className={`text-sm ${styles.textSecondary} text-center md:text-left`}

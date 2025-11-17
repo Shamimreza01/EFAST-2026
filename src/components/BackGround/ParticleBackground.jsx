@@ -112,9 +112,9 @@ export default function ParticleBackground() {
               cy: [Math.random() * 100, Math.random() * 100],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: Math.random() * 10 + 50,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: Math.random() * 20,
             }}
           />
         ))}

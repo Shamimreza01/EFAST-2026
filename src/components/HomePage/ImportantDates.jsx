@@ -27,14 +27,19 @@ export default function ImportantDates({ theme, styles }) {
   };
   return (
     <motion.section
+<<<<<<< HEAD
       className="py-10 md:py-4 px-3 sm:px-2 relative mt-1"
+=======
+      className="py-6 md:py-4 px-1 sm:px-2 relative mt-1"
+>>>>>>> redesign
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
       viewport={{ once: true }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-3">
+<<<<<<< HEAD
           {confData.conference.important_dates
             .slice(0, 4)
             .map((date, index) => (
@@ -46,6 +51,44 @@ export default function ImportantDates({ theme, styles }) {
                       ? "border-blue-500 bg-blue-50/50"
                       : "border-cyan-400 bg-cyan-900/20"
                     : styles.card
+=======
+          {confData.conference.important_dates.map((date, index) => (
+            <motion.div
+              key={date.title}
+              className={`relative rounded-xl pt-2 sm:pt-2 sm:pl-3 sm:pr-3 sm:pb-2 border-2 shadow-lg transition-all duration-300 w-64 min-h-[180px]  ${
+                date.highlight
+                  ? theme === "light"
+                    ? "border-blue-500 bg-blue-50/50"
+                    : "border-cyan-400 bg-cyan-900/20"
+                  : styles.card
+              }`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{
+                y: -4,
+                scale: 1.02,
+                boxShadow:
+                  theme === "light"
+                    ? "0 10px 25px rgba(0, 102, 204, 0.15)"
+                    : "0 10px 25px rgba(6, 182, 212, 0.15)",
+              }}
+              viewport={{ once: true }}
+            >
+              <div className="absolute -top-2 -right-2">
+                <span className={getStatusColor(date.status)}>
+                  {date.status}
+                </span>
+              </div>
+
+              <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-center">
+                {date.icon}
+              </div>
+
+              <h3
+                className={`text-base sm:text-lg font-bold text-center mb-2 sm:mb-3 ${
+                  date.highlight ? styles.accent : styles.text
+>>>>>>> redesign
                 }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

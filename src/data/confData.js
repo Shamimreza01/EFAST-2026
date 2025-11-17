@@ -19,7 +19,12 @@ const confData = {
     tracks: [
       {
         track_title: "Mathematical Sciences and Modeling",
+<<<<<<< HEAD
         icon: "📊", // Chart for mathematics and modeling
+=======
+        icon: "📊",
+        punchline: "Where mathematical ideas shape real-world innovation.",
+>>>>>>> redesign
         topics: [
           "Pure and Applied Mathematics",
           "Numerical Analysis and Computational Methods",
@@ -30,7 +35,12 @@ const confData = {
       },
       {
         track_title: "Advanced Physics and Nuclear Sciences",
+<<<<<<< HEAD
         icon: "⚛️", // Atom symbol for physics
+=======
+        icon: "⚛️",
+        punchline: "Probing the deepest principles of nature and the universe.",
+>>>>>>> redesign
         topics: [
           "Theoretical and Mathematical Physics",
           "Condensed Matter and Material Physics",
@@ -45,7 +55,12 @@ const confData = {
       },
       {
         track_title: "Statistical Methods and Applications",
+<<<<<<< HEAD
         icon: "📈", // Growing chart for statistics
+=======
+        icon: "📈",
+        punchline: "Turning complex data into clear, actionable truth.",
+>>>>>>> redesign
         topics: [
           "Biostatistics and Public Health",
           "Econometrics and Financial Statistics",
@@ -55,7 +70,13 @@ const confData = {
       },
       {
         track_title: "Chemical Sciences and Innovations",
+<<<<<<< HEAD
         icon: "🔬", // Test tube for chemistry
+=======
+        icon: "🔬",
+        punchline:
+          "Engineering matter for sustainable scientific breakthroughs.",
+>>>>>>> redesign
         topics: [
           "Organic, Inorganic, and Physical Chemistry",
           "Analytical and Environmental Chemistry",
@@ -65,7 +86,12 @@ const confData = {
       },
       {
         track_title: "Pharmaceutical Sciences and Drug Discovery",
+<<<<<<< HEAD
         icon: "💊", // Pill for pharmaceuticals
+=======
+        icon: "💊",
+        punchline: "Advancing healthcare through smarter, safer medicines.",
+>>>>>>> redesign
         topics: [
           "Pharmacology and Toxicology",
           "Pharmaceutics and Drug Delivery Systems",
@@ -75,7 +101,12 @@ const confData = {
       },
       {
         track_title: "Geography, Environment, and Sustainable Development",
+<<<<<<< HEAD
         icon: "🌱", // Seedling for environment
+=======
+        icon: "🌱",
+        punchline: "Building a resilient future through environmental insight.",
+>>>>>>> redesign
         topics: [
           "Land, Water, and Ecosystem Management",
           "Wetland Restoration and Biodiversity Conservation in Changing Environments",
@@ -90,7 +121,12 @@ const confData = {
       {
         track_title:
           "Intelligent Computing, AI, and Communication Technologies",
+<<<<<<< HEAD
         icon: "🤖", // Robot for AI and computing
+=======
+        icon: "🤖",
+        punchline: "Smart systems powering the next digital revolution.",
+>>>>>>> redesign
         topics: [
           "Big Data Analysis and Data Mining",
           "Machine Learning and Robotics",
@@ -102,7 +138,12 @@ const confData = {
       },
       {
         track_title: "Networks and Cyber Security",
+<<<<<<< HEAD
         icon: "🔒", // Lock for cybersecurity
+=======
+        icon: "🔒",
+        punchline: "Securing the connected world, one layer at a time.",
+>>>>>>> redesign
         topics: [
           "Network Architecture and Protocols",
           "Cyber Security Threats and Defense",
@@ -139,12 +180,28 @@ const confData = {
     },
     important_dates: [
       {
+<<<<<<< HEAD
         title: "Abstract Submission",
+=======
+        title: "Abstract Submission Deadline",
+>>>>>>> redesign
         date: "April 12, 2026",
         status: "Open Soon",
         icon: "✍️", // Writing hand
         highlight: true,
+<<<<<<< HEAD
         description: "Submit your research abstract for peer review",
+=======
+        description: "Submit abstract for peer review",
+      },
+      {
+        title: "Early Bird Registration",
+        date: "June 14, 2026",
+        status: "Upcoming",
+        icon: "🎯",
+        highlight: true,
+        description: "Register early for discounted rates",
+>>>>>>> redesign
       },
       {
         title: "Acceptance Notification",
@@ -155,6 +212,7 @@ const confData = {
         description: "Notification of abstract acceptance",
       },
       {
+<<<<<<< HEAD
         title: "Early Bird Registration",
         date: "June 14, 2026",
         status: "Upcoming",
@@ -164,10 +222,14 @@ const confData = {
       },
       {
         title: "Full Paper Deadline",
+=======
+        title: "Full Papers Submition Deadline",
+>>>>>>> redesign
         date: "June 21, 2026",
         status: "Upcoming",
         icon: "📑", // Document with pages
         highlight: false,
+<<<<<<< HEAD
         description: "Submit full papers for journal publication",
       },
       {
@@ -177,6 +239,9 @@ const confData = {
         icon: "🏛️", // Classical building
         highlight: true,
         description: "Join us for the main conference events",
+=======
+        description: "Submit papers for journal ",
+>>>>>>> redesign
       },
     ],
     publication_opportunity:
