@@ -1,26 +1,17 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import confData from "../../data/confData.js";
 import conferenceData from "../../data/data.js";
 import galleryImages from "../../data/GalleryImages.js";
+import ParticleBackground from "../BackGround/ParticleBackground.jsx";
 import QuantumCircuit from "../BackGround/QuantumCircuit";
 import ScrollIndicator from "../BackGround/ScrollIndicator.jsx";
-import CalendarIcon from "../Icon/CalendarIcon.jsx";
-import HandShakeIcon from "../Icon/HandShakeIcon.jsx";
 import LocationIcon from "../Icon/LocationIcon.jsx";
+import DateAndMode from "./DateAndMode.jsx";
 import ImportantDates from "./ImportantDates.jsx";
 const HeroSection = ({ theme, styles }) => {
   const heroRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
-  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCurrentImageIndex(
-  //       (prevIndex) => (prevIndex + 1) % galleryImages.length
-  //     );
-  //   }, 5000);
-  //   return () => clearInterval(timer);
-  // }, []);
 
   const handleGalleryClick = () => {
     const gallerySection = document.getElementById("gallery");
@@ -32,20 +23,11 @@ const HeroSection = ({ theme, styles }) => {
     <section
       id="home"
       ref={heroRef}
-      className="min-h-screen relative flex  items-center flex-wrap justify-center px-6 overflow-hidden lg:pt-5 pt-20"
+      className="min-h-screen relative flex  items-center flex-wrap justify-center px-2 overflow-hidden lg:pt-5 pt-20"
     >
-      {/* <ParticleBackground /> */}
+      <ParticleBackground />
       <QuantumCircuit />
-      {/* <motion.img
-        key={galleryImages[currentImageIndex].id}
-        src={`${galleryImages[currentImageIndex].src}`}
-        alt={galleryImages[currentImageIndex].alt}
-        className="absolute inset-0 object-cover h-full w-full opacity-100"
-        initial={{ opacity: 0 }}
-        animate={isHeroInView ? { opacity: 0.5 } : { opacity: 0 }}
-        transition={{ duration: 1 }}
-      /> */}
-      {/*  */}
+
       <div className="sm:grid hidden grid-cols-2 sm:grid-cols-15 gap-0 mt-12 border-blue-300 border-2 rounded-b-lg overflow-hidden mx-0 my-0">
         {galleryImages.map((image) => (
           <motion.img
@@ -61,7 +43,7 @@ const HeroSection = ({ theme, styles }) => {
         ))}
       </div>
       <motion.div
-        className="text-center p-5  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
+        className="text-center p-2  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
         initial={{ opacity: 0, y: 50 }}
         animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 1 }}
@@ -72,16 +54,9 @@ const HeroSection = ({ theme, styles }) => {
           animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          {conferenceData.subtitle}
+          {confData.conference.name}
         </motion.p>
-        {/* <motion.img
-          src="/EFAST_logo.png"
-          alt="Conference Logo"
-          className="mx-auto mb-4 h-12 md:h-32 w-12 md:w-32"
-          initial={{ opacity: 0 }}
-          animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        /> */}
+
         <motion.h1
           className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -93,17 +68,17 @@ const HeroSection = ({ theme, styles }) => {
           <span
             className={`bg-clip-text text-transparent bg-linear-to-r ${styles.accentGradient}`}
           >
-            {conferenceData.title}
+            {confData.conference.short_name}
           </span>
         </motion.h1>
+        <DateAndMode
+          theme={theme}
+          styles={styles}
+          isHeroInView={isHeroInView}
+        />
+
         <p
-          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
-        >
-          <CalendarIcon className="w-6 h-6 inline-block mr-1" />
-          {conferenceData.date}
-        </p>
-        <p
-          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
+          className={`text-lg md:text-xl mt-15 cursor-pointer ${styles.textSecondary}`}
         >
           <span onClick={handleGalleryClick}>
             <LocationIcon className="w-6 h-6 inline-block  mr-1" />
@@ -114,14 +89,14 @@ const HeroSection = ({ theme, styles }) => {
         <p
           className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
         >
-          <HandShakeIcon className="w-6 h-6 inline-block mr-1" />{" "}
+          <LocationIcon className="w-6 h-6 inline-block  mr-1" />
           {conferenceData.location2}
         </p>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
+          className="flex flex-col sm:flex-row gap-4 justify-center mt-8 mb-5"
         >
           <motion.button
             className={`px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition-all ${styles.buttonPrimary}`}

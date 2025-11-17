@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import importantDates from "../../data/ImportantDates";
+import confData from "../../data/confData";
 
 export default function ImportantDates({ theme, styles }) {
   const getStatusColor = (status) => {
@@ -27,18 +27,18 @@ export default function ImportantDates({ theme, styles }) {
   };
   return (
     <motion.section
-      className="py-12 md:py-4 px-4 sm:px-2 relative mt-1"
+      className="py-6 md:py-4 px-1 sm:px-2 relative mt-1"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
       viewport={{ once: true }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-3">
-          {importantDates.map((date, index) => (
+          {confData.conference.important_dates.map((date, index) => (
             <motion.div
               key={date.title}
-              className={`relative rounded-xl p-4 sm:p-4 border-2 shadow-lg transition-all duration-300 min-h-[180px] sm:min-h-[210px] ${
+              className={`relative rounded-xl pt-2 sm:pt-2 sm:pl-3 sm:pr-3 sm:pb-2 border-2 shadow-lg transition-all duration-300 w-64 min-h-[180px]  ${
                 date.highlight
                   ? theme === "light"
                     ? "border-blue-500 bg-blue-50/50"
