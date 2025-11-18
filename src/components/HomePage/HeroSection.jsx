@@ -27,7 +27,6 @@ const HeroSection = ({ theme, styles }) => {
     >
       <ParticleBackground />
       <QuantumCircuit />
-
       <div className="sm:grid hidden grid-cols-2 sm:grid-cols-15 gap-0 mt-12 border-blue-300 border-2 rounded-b-lg overflow-hidden mx-0 my-0">
         {galleryImages.map((image) => (
           <motion.img
@@ -42,95 +41,100 @@ const HeroSection = ({ theme, styles }) => {
           />
         ))}
       </div>
-      <motion.div
-        className="text-center p-2  rounded-3xl z-10 max-w-4xl mx-auto md:mb-25"
-        initial={{ opacity: 0, y: 50 }}
-        animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.p
-          className={`text-md md:text-2xl mb-2  font-semibold text-[#6a0000] ${styles.textSecondary}`}
-          initial={{ opacity: 0 }}
-          animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          {confData.conference.name}
-        </motion.p>
-
-        <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={
-            isHeroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-          }
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          <span
-            className={`bg-clip-text text-transparent bg-linear-to-r ${styles.accentGradient}`}
-          >
-            {confData.conference.short_name}
-          </span>
-        </motion.h1>
-        <DateAndMode
-          theme={theme}
-          styles={styles}
-          isHeroInView={isHeroInView}
-        />
-
-        <p
-          className={`text-lg md:text-xl mt-15 cursor-pointer ${styles.textSecondary}`}
-        >
-          <span onClick={handleGalleryClick}>
-            <LocationIcon className="w-6 h-6 inline-block  mr-1" />
-            {conferenceData.location}
-          </span>
-        </p>
-        <p className={`text-lg md:text-xl ${styles.textSecondary}`}>and</p>
-        <p
-          className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
-        >
-          <LocationIcon className="w-6 h-6 inline-block  mr-1" />
-          {conferenceData.location2}
-        </p>
+      <div className="flex justify-center flex-wrap lg:flex-nowrap">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mt-8 mb-5"
+          className="text-center p-2  rounded-3xl z-10 max-w-full md:max-w-2xl mx-auto md:mb-25"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 1 }}
         >
-          <motion.button
-            className={`px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition-all ${styles.buttonPrimary}`}
-            whileHover={{
-              scale: 1.05,
-              boxShadow:
-                theme === "light"
-                  ? "0 10px 30px rgba(0, 102, 204, 0.4)"
-                  : "0 10px 30px rgba(6, 182, 212, 0.4)",
-            }}
-            whileTap={{ scale: 0.95 }}
+          <motion.p
+            className={`text-md sm:text-xl md:text-2xl mb-2 font-semibold text-[#6a0000] ${styles.textSecondary}`}
+            initial={{ opacity: 0 }}
+            animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
           >
-            Register Now
-          </motion.button>
+            {confData.conference.name}
+          </motion.p>
 
-          <motion.button
-            className={`px-8 py-3 rounded-full font-semibold text-lg backdrop-blur-sm transition-all ${styles.buttonSecondary}`}
-            whileHover={{
-              scale: 1.05,
-              backgroundColor:
-                theme === "light"
-                  ? "rgba(0, 102, 204, 0.1)"
-                  : "rgba(6, 182, 212, 0.1)",
-            }}
-            whileTap={{ scale: 0.95 }}
+          <motion.h1
+            className="text-4xl sm:5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={
+              isHeroInView
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.8 }
+            }
+            transition={{ duration: 1, delay: 0.2 }}
           >
-            View Schedule
-          </motion.button>
+            <span
+              className={`bg-clip-text text-transparent bg-linear-to-r ${styles.accentGradient}`}
+            >
+              {confData.conference.short_name}
+            </span>
+          </motion.h1>
+          <DateAndMode
+            theme={theme}
+            styles={styles}
+            isHeroInView={isHeroInView}
+          />
+
+          <p
+            className={`text-lg md:text-xl mt-15 cursor-pointer ${styles.textSecondary}`}
+          >
+            <span onClick={handleGalleryClick}>
+              <LocationIcon className="w-6 h-6 inline-block  mr-1" />
+              {conferenceData.location}
+            </span>
+          </p>
+          <p className={`text-lg md:text-xl ${styles.textSecondary}`}>and</p>
+          <p
+            className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
+          >
+            <LocationIcon className="w-6 h-6 inline-block  mr-1" />
+            {conferenceData.location2}
+          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={
+              isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+            }
+            transition={{ duration: 1, delay: 0.9 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mt-8 mb-5"
+          >
+            <motion.button
+              className={`px-8 py-3 rounded-full font-semibold text-lg shadow-lg transition-all ${styles.buttonPrimary}`}
+              whileHover={{
+                scale: 1.05,
+                boxShadow:
+                  theme === "light"
+                    ? "0 10px 30px rgba(0, 102, 204, 0.4)"
+                    : "0 10px 30px rgba(6, 182, 212, 0.4)",
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Register Now
+            </motion.button>
+
+            <motion.button
+              className={`px-8 py-3 rounded-full font-semibold text-lg backdrop-blur-sm transition-all ${styles.buttonSecondary}`}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor:
+                  theme === "light"
+                    ? "rgba(0, 102, 204, 0.1)"
+                    : "rgba(6, 182, 212, 0.1)",
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Schedule
+            </motion.button>
+          </motion.div>
         </motion.div>
-      </motion.div>
 
-      {/* Important Dates Section */}
-      <ImportantDates theme={theme} styles={styles} />
-
+        {/* Important Dates Section */}
+        <ImportantDates theme={theme} styles={styles} />
+      </div>
       {/* Scroll Indicator */}
       <ScrollIndicator theme={theme} styles={styles} />
     </section>
