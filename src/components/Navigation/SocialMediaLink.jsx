@@ -2,11 +2,10 @@ import FacebookIcon from "../Icon/FacebookIcon";
 import LinkedInIcon from "../Icon/LinkedInIcon";
 import TwitterIcon from "../Icon/TwitterIcon";
 export default function SocialMediaLink({ theme, confData }) {
-  console.log(confData);
   return (
     <div className="flex items-center gap-4">
       <a
-        href="https://twitter.com/yourprofile"
+        href="https://twitter.com/"
         target="_blank"
         rel="noopener noreferrer"
         className={`p-2 rounded-full ${
@@ -30,7 +29,7 @@ export default function SocialMediaLink({ theme, confData }) {
         <FacebookIcon className="w-6 h-6" />
       </a>
       <a
-        href={`${confData.conference.facebook}`}
+        href={`${confData.conference.linkedin}`}
         target="_blank"
         rel="noopener noreferrer"
         className={`p-2 rounded-full ${

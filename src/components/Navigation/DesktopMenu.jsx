@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import SocialMediaLink from "./SocialMediaLink";
 
 export default function DesktopMenu({
@@ -13,6 +14,7 @@ export default function DesktopMenu({
   committeeOpen,
   setCommitteeOpen,
 }) {
+  console.log("Active Section:", activeSection);
   return (
     <div className="hidden md:flex flex-wrap items-center justify-evenly gap-4">
       {menuItems.map((item) => {
@@ -73,8 +75,8 @@ export default function DesktopMenu({
                     transition={{ duration: 0.2 }}
                   >
                     <div className="py-2">
-                      <a
-                        href="#keynote-speaker"
+                      <Link
+                        to="/keynote-speaker"
                         className={`block px-4 py-2 text-md transition-colors ${
                           theme === "light"
                             ? "hover:bg-blue-50 text-red-800"
@@ -86,9 +88,9 @@ export default function DesktopMenu({
                         }}
                       >
                         Keynote Speaker
-                      </a>
-                      <a
-                        href="#invited-speaker"
+                      </Link>
+                      <Link
+                        to="/invited-speaker"
                         className={`block px-4 py-2 text-md transition-colors ${
                           theme === "light"
                             ? "hover:bg-blue-50 text-red-800"
@@ -100,7 +102,7 @@ export default function DesktopMenu({
                         }}
                       >
                         Invited Speaker
-                      </a>
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -163,8 +165,8 @@ export default function DesktopMenu({
                     transition={{ duration: 0.2 }}
                   >
                     <div className="py-2">
-                      <a
-                        href="#organizing-committee"
+                      <Link
+                        to="/organizing-committee"
                         className={`block px-4 py-2 text-md transition-colors ${
                           theme === "light"
                             ? "hover:bg-blue-50 text-red-800"
@@ -176,9 +178,9 @@ export default function DesktopMenu({
                         }}
                       >
                         Organizing Committee
-                      </a>
-                      <a
-                        href="#technical-program-committee"
+                      </Link>
+                      <Link
+                        to="/technical-program-committee"
                         className={`block px-4 py-2 text-md transition-colors ${
                           theme === "light"
                             ? "hover:bg-blue-50 text-red-800"
@@ -190,9 +192,9 @@ export default function DesktopMenu({
                         }}
                       >
                         Technical Program Committee
-                      </a>
-                      <a
-                        href="#advisory-committee"
+                      </Link>
+                      <Link
+                        to="/advisory-committee"
                         className={`block px-4 py-2 text-md transition-colors ${
                           theme === "light"
                             ? "hover:bg-blue-50 text-red-800"
@@ -204,7 +206,7 @@ export default function DesktopMenu({
                         }}
                       >
                         Advisory Committee
-                      </a>
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -213,44 +215,87 @@ export default function DesktopMenu({
           );
         }
 
-        // Regular menu items
+        // Regular menu items - Converted to React Router Link
         return (
-          <motion.a
-            key={item}
-            href={`#${sectionId}`}
-            className={`relative py-2 px-1 font-semibold transition-colors ${
-              isActive
-                ? styles.accent
-                : `${styles.textSecondary} hover:${styles.text}`
-            }`}
-            onClick={() => setActiveSection(sectionId)}
-            whileHover={{ y: -1.5 }}
-            transition={{ duration: 0.15 }}
-          >
-            {item}
-            {isActive && (
-              <motion.span
-                className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
-                layoutId="navIndicator"
-                style={{
-                  background:
-                    theme === "light"
-                      ? "linear-gradient(90deg,#3B82F6,#8B5CF6)"
-                      : "linear-gradient(90deg,#22D3EE,#3B82F6)",
-                }}
-              />
+          <motion.div key={item} className="relative">
+            {sectionId === "home" ||
+            sectionId === "schedule" ||
+            sectionId === "register" ? (
+              <Link
+                to={`/${sectionId === "home" ? "" : sectionId}`}
+                className={`relative py-2 px-1 font-semibold transition-colors block ${
+                  isActive
+                    ? styles.accent
+                    : `${styles.textSecondary} hover:${styles.text}`
+                }`}
+                onClick={() => setActiveSection(sectionId)}
+              >
+                <motion.span
+                  className="block"
+                  whileHover={{ y: -1.5 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {item}
+                </motion.span>
+                {isActive && (
+                  <motion.span
+                    className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
+                    layoutId="navIndicator"
+                    style={{
+                      background:
+                        theme === "light"
+                          ? "linear-gradient(90deg,#3B82F6,#8B5CF6)"
+                          : "linear-gradient(90deg,#22D3EE,#3B82F6)",
+                    }}
+                  />
+                )}
+              </Link>
+            ) : (
+              <a
+                href={`/${sectionId === "home" ? "" : "#" + sectionId}`}
+                className={`relative py-2 px-1 font-semibold transition-colors block ${
+                  isActive
+                    ? styles.accent
+                    : `${styles.textSecondary} hover:${styles.text}`
+                }`}
+                onClick={() => setActiveSection(sectionId)}
+              >
+                <motion.span
+                  className="block"
+                  whileHover={{ y: -1.5 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {item}
+                </motion.span>
+                {isActive && (
+                  <motion.span
+                    className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
+                    layoutId="navIndicator"
+                    style={{
+                      background:
+                        theme === "light"
+                          ? "linear-gradient(90deg,#3B82F6,#8B5CF6)"
+                          : "linear-gradient(90deg,#22D3EE,#3B82F6)",
+                    }}
+                  />
+                )}
+              </a>
             )}
-          </motion.a>
+          </motion.div>
         );
       })}
+
+      {/* Abstract Submission Button - Converted to React Router Link */}
       <div className="hidden md:block">
-        <a
-          href="#submit-paper"
+        <Link
+          to="/abstract-submission"
           className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${styles.buttonPrimary}`}
+          onClick={() => setActiveSection("submit-paper")}
         >
           Abstract Submission
-        </a>
+        </Link>
       </div>
+
       <SocialMediaLink theme={theme} confData={confData} />
     </div>
   );

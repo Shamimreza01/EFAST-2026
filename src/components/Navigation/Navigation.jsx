@@ -1,5 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import confData from "../../data/confData";
 import MoonIcon from "../Icon/MoonIcon";
 import SunIcon from "../Icon/SunIcon";
 import DesktopMenu from "./DesktopMenu";
@@ -7,7 +9,9 @@ import MobileMenu from "./MobileMenu";
 import MobileMenuIcon from "./MobileMenuIcon";
 import MobileUniversityLogo from "./MobileUniversityLogo";
 import UniversityLogoWithText from "./UniversityLogoWithText";
-const Navigation = ({ theme, setTheme, styles, confData, containerRef }) => {
+const Navigation = () => {
+  const containerRef = document.querySelector("div[ref='containerRef']");
+  const [theme, setTheme, styles] = useContext(ThemeContext);
   const [activeSection, setActiveSection] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [speakersOpen, setSpeakersOpen] = useState(false);
