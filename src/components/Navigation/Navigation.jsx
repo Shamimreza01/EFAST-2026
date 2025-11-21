@@ -61,11 +61,11 @@ const Navigation = ({ theme, setTheme, styles, confData, containerRef }) => {
           <MobileUniversityLogo styles={styles} confData={confData} />
         </div>
 
-        <div className="flex items-center gap-3 md:gap-6">
+        <div className="flex items-center gap-3  md:gap-6">
           {/* Theme Toggle */}
           <motion.button
             onClick={toggleTheme}
-            className={`p-2 rounded-full ${
+            className={`p-2 ml-10 rounded-full ${
               theme === "light"
                 ? "bg-blue-100 text-blue-600"
                 : "bg-gray-800 text-cyan-300"

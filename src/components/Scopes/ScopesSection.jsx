@@ -27,11 +27,11 @@ export default function ScopesSection({
           {confData.conference.trackstitle}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
           {confData.conference.tracks.map((track, index) => (
             <motion.div
               key={track.track_title}
-              className={`rounded-xl border shadow-sm transition-all duration-300 overflow-hidden cursor-pointer ${
+              className={`break-inside-avoid mb-6 rounded-xl border shadow-sm transition-all duration-300 overflow-hidden cursor-pointer${
                 expandedTrack === index
                   ? `${styles.cardHover} shadow-lg ring-2 ring-opacity-50 ${
                       theme === "light" ? "ring-blue-200" : "ring-cyan-500/30"
@@ -45,9 +45,9 @@ export default function ScopesSection({
               onClick={() =>
                 setExpandedTrack(expandedTrack === index ? null : index)
               }
-              layout
+              layout="position"
             >
-              {/* Track Header */}
+              {/* HEADER */}
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="text-4xl text-center mb-4">{track.icon}</div>
@@ -86,7 +86,7 @@ export default function ScopesSection({
                 </p>
               </div>
 
-              {/* Subtracks List */}
+              {/* EXPANDED CONTENT */}
               <AnimatePresence>
                 {expandedTrack === index && (
                   <motion.div

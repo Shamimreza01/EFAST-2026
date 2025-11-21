@@ -27,8 +27,8 @@ const HeroSection = ({ theme, styles }) => {
     >
       <ParticleBackground />
       <QuantumCircuit />
-      <div className="sm:grid hidden grid-cols-2 sm:grid-cols-15 gap-0 mt-12 border-blue-300 border-2 rounded-b-lg overflow-hidden mx-0 my-0">
-        {galleryImages.map((image) => (
+      <div className="sm:grid hidden grid-cols-2 sm:grid-cols-10 gap-0 mt-12 border-blue-300 border-2 rounded-b-lg overflow-hidden mx-0 my-0">
+        {galleryImages.slice(9, 19).map((image) => (
           <motion.img
             key={image.id}
             src={image.src}
@@ -41,22 +41,21 @@ const HeroSection = ({ theme, styles }) => {
           />
         ))}
       </div>
-      <div className="flex justify-center flex-wrap lg:flex-nowrap">
+      <div className="flex min-w-full justify-center lg:justify-center flex-wrap lg:flex-nowrap">
         <motion.div
-          className="text-center p-2  rounded-3xl z-10 max-w-full md:max-w-2xl mx-auto md:mb-25"
+          className="text-center p-2  rounded-3xl z-10 max-w-full md:max-w-2xl mx-auto md:mb-25 lg:max-w-5xl"
           initial={{ opacity: 0, y: 50 }}
           animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 1 }}
         >
           <motion.p
-            className={`text-md sm:text-xl md:text-2xl mb-2 font-semibold text-[#6a0000] ${styles.textSecondary}`}
+            className={`text-md sm:text-xl md:text-2xl lg:text-3xl mb-2 font-semibold text-[#6a0000] ${styles.textSecondary}`}
             initial={{ opacity: 0 }}
             animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             {confData.conference.name}
           </motion.p>
-
           <motion.h1
             className="text-4xl sm:5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -78,22 +77,62 @@ const HeroSection = ({ theme, styles }) => {
             styles={styles}
             isHeroInView={isHeroInView}
           />
+          <motion.div
+            className="mt-10 lg:mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={
+              isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+            }
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
+            {/* Organized By Header */}
+            <motion.p
+              className={`text-xl md:text-2xl font-semibold text-center mb-6 ${styles.accent} flex items-center justify-center gap-3`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={
+                isHeroInView
+                  ? { opacity: 1, scale: 1 }
+                  : { opacity: 0, scale: 0.9 }
+              }
+              transition={{ duration: 0.6, delay: 1.3 }}
+            >
+              <svg
+                className="w-7 h-7"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                />
+              </svg>
+              Organized By
+            </motion.p>
 
-          <p
-            className={`text-lg md:text-xl mt-15 cursor-pointer ${styles.textSecondary}`}
-          >
-            <span onClick={handleGalleryClick}>
-              <LocationIcon className="w-6 h-6 inline-block  mr-1" />
-              {conferenceData.location}
-            </span>
-          </p>
-          <p className={`text-lg md:text-xl ${styles.textSecondary}`}>and</p>
-          <p
-            className={`text-lg md:text-xl cursor-pointer ${styles.textSecondary}`}
-          >
-            <LocationIcon className="w-6 h-6 inline-block  mr-1" />
-            {conferenceData.location2}
-          </p>
+            <div className="inline-block text-center">
+              <button
+                onClick={handleGalleryClick}
+                className={`flex items-center text-center text-lg md:text-xl font-medium cursor-pointer transition-colors hover:text-blue-700 ${styles.textSecondary}`}
+              >
+                <LocationIcon className="w-6 h-6 mr-2" />
+                {conferenceData.location}
+              </button>
+
+              <span className={` text-lg md:text-xl ${styles.textSecondary}`}>
+                and
+              </span>
+
+              <div className="flex items-center text-center text-lg md:text-xl font-medium">
+                <LocationIcon className="w-6 h-6 mr-2" />
+                <span className={styles.textSecondary}>
+                  {conferenceData.location2}
+                </span>
+              </div>
+            </div>
+          </motion.div>{" "}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={

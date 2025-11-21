@@ -19,7 +19,7 @@ export default function ParticleBackground() {
   const [isDark] = useContext(ThemeContext);
   const theme = isDark ? "dark" : "light";
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute hidden md:block lg:block inset-0 overflow-hidden">
       <svg
         className="w-full h-full"
         viewBox="0 0 100 100"
@@ -85,7 +85,7 @@ export default function ParticleBackground() {
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
             transition={{
-              duration: 2,
+              duration: 10,
               delay: i * 0.1,
               repeat: Infinity,
               repeatType: "reverse",

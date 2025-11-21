@@ -89,5 +89,29 @@ const galleryImages = [
     alt: "PUST Student Workshop",
     category: "events",
   },
+  {
+    id: 16,
+    src: "https://ftke.unimap.edu.my/wp-content/uploads/2022/07/lib7.jpg",
+    alt: "PUST Campus Green Area",
+    category: "campus",
+  },
+  {
+    id: 17,
+    src: "https://ftke.unimap.edu.my/wp-content/uploads/2022/07/Dewan-Ilmu-UniMAP.jpg",
+    alt: "PUST Campus Green Area",
+    category: "campus",
+  },
+  {
+    id: 18,
+    src: "https://www.unimap.edu.my/images/Slider/canselori2.JPG",
+    alt: "PUST Campus Green Area",
+    category: "campus",
+  },
+  {
+    id: 19,
+    src: "/UniMAP02.png",
+    alt: "unimap",
+    category: "campus",
+  },
 ];
 export default galleryImages;

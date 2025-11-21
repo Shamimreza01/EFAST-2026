@@ -27,7 +27,7 @@ export default function ImportantDates({ theme, styles }) {
   };
   return (
     <motion.section
-      className="py-6  md:py-4 px-1 sm:px-2 relative mt-1"
+      className="py-6  md:py-4 px-1  sm:px-2 relative mt-1"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
