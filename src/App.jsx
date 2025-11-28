@@ -5,7 +5,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="fixed inset-0">
+      <div className="">
         <Navigation />
         <Outlet />
       </div>

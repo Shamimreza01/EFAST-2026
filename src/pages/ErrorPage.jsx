@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
+import SEO from "../components/SEO";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 import confData from "../data/confData.js";
+
 const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
   const navigate = useNavigate();
+  const [theme, setTheme, styles] = useContext(ThemeContext);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -24,7 +29,16 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+    <div
+      className={`min-h-screen ${styles.bg} flex items-center justify-center p-4`}
+    >
+      <SEO
+        title={`${errorCode} - ${errorMessage}`}
+        description="Page not found."
+        keywords="Error, 404, EFAST 2026"
+        url={window.location.href}
+        image="/EFAST.jpg"
+      />
       <motion.div
         className="max-w-4xl mx-auto text-center"
         variants={containerVariants}
@@ -45,7 +59,7 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
               >
                 <motion.path
                   d="M20,20 L80,20 L80,80 L20,80 Z"
-                  stroke="currentColor"
+                  stroke={theme === "light" ? "#4B5563" : "#E5E7EB"}
                   strokeWidth="2"
                   fill="none"
                   initial={{ pathLength: 0 }}
@@ -60,7 +74,7 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
                   cx="50"
                   cy="50"
                   r="8"
-                  fill="currentColor"
+                  fill={theme === "light" ? "#4B5563" : "#E5E7EB"}
                   initial={{ scale: 0 }}
                   animate={{ scale: [0, 1, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -80,7 +94,9 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.5 }}
           >
-            <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r ${styles.accentGradient} bg-clip-text text-transparent`}
+            >
               {errorCode}
             </span>
           </motion.div>
@@ -94,7 +110,8 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
           >
             <div className="relative">
               <motion.div
-                className="w-4 h-4 bg-blue-400 rounded-full"
+                className={`w-4 h-4 rounded-full ${theme === "light" ? "bg-blue-500" : "bg-cyan-400"
+                  }`}
                 animate={{
                   scale: [1, 2, 1],
                   opacity: [1, 0.5, 1],
@@ -106,7 +123,8 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
                 }}
               />
               <motion.div
-                className="absolute inset-0 w-4 h-4 bg-purple-500 rounded-full"
+                className={`absolute inset-0 w-4 h-4 rounded-full ${theme === "light" ? "bg-purple-500" : "bg-blue-500"
+                  }`}
                 animate={{
                   scale: [1, 3, 1],
                   opacity: [0.5, 0, 0.5],
@@ -123,44 +141,156 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
 
           {/* Error Message */}
           <motion.h1
-            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            className={`text-3xl md:text-4xl font-bold mb-6 ${styles.text}`}
             variants={itemVariants}
           >
             {errorMessage}
           </motion.h1>
 
           <motion.p
-            className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            className={`text-xl mb-8 max-w-2xl mx-auto ${styles.textSecondary}`}
             variants={itemVariants}
           >
-            It seems this quantum state has collapsed. The page you're looking
-            for has either been redirected or doesn't exist in our conference
-            spacetime continuum.
+            The page you're looking for has either been redirected or doesn't
+            exist in our conference site.
           </motion.p>
+
+          {/* Animated Circuit Diagram */}
+          {/* <motion.div
+            className="my-12 flex justify-center"
+            variants={itemVariants}
+          >
+            <svg
+              width="300"
+              height="120"
+              viewBox="0 0 300 120"
+              className={theme === "light" ? "text-blue-600" : "text-cyan-400"}
+            >
+             
+              <motion.path
+                d="M20,60 L80,60 L80,30 L180,30 L180,90 L280,90"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="none"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, delay: 1 }}
+              />
+
+          
+              <motion.g
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.5 }}
+              >
+                <line
+                  x1="140"
+                  y1="30"
+                  x2="160"
+                  y2="30"
+                  stroke="red"
+                  strokeWidth="4"
+                />
+                <motion.g
+                  animate={{ x: [-5, 5, -5] }}
+                  transition={{ duration: 0.5, repeat: Infinity }}
+                >
+                  <circle cx="150" cy="30" r="3" fill="red" />
+                </motion.g>
+              </motion.g>
+
+             
+              <motion.circle
+                cx="80"
+                cy="60"
+                r="4"
+                fill="currentColor"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1.2 }}
+              />
+              <motion.circle
+                cx="180"
+                cy="30"
+                r="4"
+                fill="currentColor"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1.4 }}
+              />
+              <motion.circle
+                cx="180"
+                cy="90"
+                r="4"
+                fill="currentColor"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1.6 }}
+              />
+
+              <motion.g
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2 }}
+              >
+                <motion.path
+                  d="M20,55 L20,65"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
+                <motion.path
+                  d="M280,85 L280,95"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
+                />
+              </motion.g>
+            </svg>
+          </motion.div> */}
+
           {/* Conference Info */}
           <motion.div
-            className="mt-12 pt-8 border-t border-white/10 mb-10"
+            className={`mt-12 pt-8 border-t mb-10 ${theme === "light" ? "border-gray-200" : "border-gray-700"
+              }`}
             variants={itemVariants}
           >
-            <p className="text-gray-400 mb-4">While you're here, remember:</p>
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
+            <p className={`mb-4 ${styles.textSecondary}`}>
+              While you're here, remember:
+            </p>
+            <div
+              className={`flex flex-wrap justify-center gap-6 text-sm ${theme === "light" ? "text-gray-600" : "text-gray-400"
+                }`}
+            >
               <motion.div
                 className="flex items-center gap-2"
-                whileHover={{ scale: 1.05, color: "#fff" }}
+                whileHover={{
+                  scale: 1.05,
+                  color: theme === "light" ? "#1f2937" : "#fff",
+                }}
               >
                 <span>📅</span>
                 <span>{confData.conference.conference_date}</span>
               </motion.div>
               <motion.div
                 className="flex items-center gap-2"
-                whileHover={{ scale: 1.05, color: "#fff" }}
+                whileHover={{
+                  scale: 1.05,
+                  color: theme === "light" ? "#1f2937" : "#fff",
+                }}
               >
                 <span>🌐</span>
                 <span>Hybrid Conference</span>
               </motion.div>
               <motion.div
                 className="flex items-center gap-2"
-                whileHover={{ scale: 1.05, color: "#fff" }}
+                whileHover={{
+                  scale: 1.05,
+                  color: theme === "light" ? "#1f2937" : "#fff",
+                }}
               >
                 <span>🎯</span>
                 <span>PUST & UniMAP</span>
@@ -175,10 +305,13 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
           >
             <motion.button
               onClick={() => navigate("/")}
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className={`px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 ${styles.buttonPrimary}`}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 40px rgba(99, 102, 241, 0.3)",
+                boxShadow:
+                  theme === "light"
+                    ? "0 20px 40px rgba(59, 130, 246, 0.3)"
+                    : "0 20px 40px rgba(6, 182, 212, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -204,7 +337,7 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
 
             <motion.button
               onClick={() => window.history.back()}
-              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className={`px-8 py-4 backdrop-blur-sm rounded-lg font-semibold text-lg border transition-all duration-300 ${styles.buttonSecondary}`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -234,7 +367,8 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
             {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-blue-400 rounded-full"
+                className={`absolute w-2 h-2 rounded-full ${theme === "light" ? "bg-blue-500" : "bg-cyan-400"
+                  }`}
                 initial={{
                   x: Math.random() * window.innerWidth,
                   y: Math.random() * window.innerHeight,
@@ -259,15 +393,12 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
 
 // Alternative 500 Error Page Component
 export const ServerErrorPage = () => (
-  <ConferenceErrorPage
-    errorCode={500}
-    errorMessage="Server Quantum Fluctuation"
-  />
+  <ErrorPage errorCode={500} errorMessage="Server Quantum Fluctuation" />
 );
 
 // Alternative 403 Error Page Component
 export const ForbiddenErrorPage = () => (
-  <ConferenceErrorPage errorCode={403} errorMessage="Access Restricted" />
+  <ErrorPage errorCode={403} errorMessage="Access Restricted" />
 );
 
 export default ErrorPage;

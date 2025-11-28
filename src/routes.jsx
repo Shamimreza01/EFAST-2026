@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
+import KeynoteSpeakers from "./pages/KeynoteSpeakers";
 import UnderDevelopmentPage from "./pages/UnderDevelopmentPage";
 
 const router = createBrowserRouter([
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/keynote-speaker",
-        element: <UnderDevelopmentPage />,
+        element: <KeynoteSpeakers />,
       },
       {
         path: "/invited-speaker",
