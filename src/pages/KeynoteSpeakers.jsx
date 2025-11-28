@@ -112,13 +112,12 @@ const KeynoteSpeakers = () => {
   return (
     <div className={`min-h-screen ${styles.bg} transition-colors duration-500`}>
       <SEO
-        title="Keynote Speakers | EFAST 2026"
+        title="Keynote Speakers"
         description="Meet the world-renowned keynote speakers shaping the future of science and technology at EFAST 2026 International Conference."
         keywords="Keynote Speakers, EFAST 2026, International Conference, Science Technology, AI, Physics, Biology, Robotics"
-        url={window.location.href}
+        url="https://efast-2026.org/keynote-speakers"
         image="/EFAST.jpg"
       />
-
       <BinaryRain intensity="medium" />
 
       <div className="relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 z-10">
@@ -182,13 +181,12 @@ const KeynoteSpeakers = () => {
                 <motion.button
                   key={field.id}
                   onClick={() => setFilter(field.id)}
-                  className={`px-5 py-3 rounded-full font-medium text-sm md:text-base transition-all duration-300 relative ${
-                    filter === field.id
-                      ? styles.buttonPrimary + " shadow-lg"
-                      : theme === "light"
+                  className={`px-5 py-3 rounded-full font-medium text-sm md:text-base transition-all duration-300 relative ${filter === field.id
+                    ? styles.buttonPrimary + " shadow-lg"
+                    : theme === "light"
                       ? "bg-white/80 text-gray-700 border border-blue-200 hover:bg-blue-50"
                       : "bg-gray-800/50 text-gray-300 border border-cyan-500/20 hover:bg-gray-700/50"
-                  } backdrop-blur-sm`}
+                    } backdrop-blur-sm`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -196,13 +194,12 @@ const KeynoteSpeakers = () => {
                     <span>{field.emoji}</span>
                     {field.name}
                     <span
-                      className={`px-2 py-1 rounded-full text-xs ${
-                        filter === field.id
-                          ? "bg-white/20 text-white"
-                          : theme === "light"
+                      className={`px-2 py-1 rounded-full text-xs ${filter === field.id
+                        ? "bg-white/20 text-white"
+                        : theme === "light"
                           ? "bg-blue-100 text-blue-600"
                           : "bg-cyan-500/20 text-cyan-400"
-                      }`}
+                        }`}
                     >
                       {field.count}
                     </span>
@@ -287,11 +284,10 @@ const KeynoteSpeakers = () => {
           {/* Enhanced CTA Section */}
           {!loading && speakers.length > 0 && (
             <motion.div
-              className={`mt-16 text-center p-12 rounded-3xl backdrop-blur-sm border ${
-                theme === "light"
-                  ? "bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200"
-                  : "bg-gradient-to-br from-gray-800/80 to-blue-900/80 border-cyan-500/20"
-              }`}
+              className={`mt-16 text-center p-12 rounded-3xl backdrop-blur-sm border ${theme === "light"
+                ? "bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200"
+                : "bg-gradient-to-br from-gray-800/80 to-blue-900/80 border-cyan-500/20"
+                }`}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -338,11 +334,10 @@ const KeynoteSpeakers = () => {
                   Register for {confData.conference.short_name}
                 </motion.button>
                 <motion.button
-                  className={`px-8 py-4 rounded-full font-semibold text-lg backdrop-blur-sm border ${
-                    theme === "light"
-                      ? "border-blue-500 text-blue-600 bg-white/80 hover:bg-blue-50"
-                      : "border-cyan-400 text-cyan-400 bg-gray-800/50 hover:bg-gray-700/50"
-                  }`}
+                  className={`px-8 py-4 rounded-full font-semibold text-lg backdrop-blur-sm border ${theme === "light"
+                    ? "border-blue-500 text-blue-600 bg-white/80 hover:bg-blue-50"
+                    : "border-cyan-400 text-cyan-400 bg-gray-800/50 hover:bg-gray-700/50"
+                    }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -359,9 +354,8 @@ const KeynoteSpeakers = () => {
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute text-2xl ${
-              theme === "light" ? "text-blue-200/40" : "text-cyan-400/20"
-            }`}
+            className={`absolute text-2xl ${theme === "light" ? "text-blue-200/40" : "text-cyan-400/20"
+              }`}
             initial={{
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,

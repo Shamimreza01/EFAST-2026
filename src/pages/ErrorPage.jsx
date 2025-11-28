@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import SEO from "../components/SEO";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 import { ThemeContext } from "../context/ThemeContext";
 import confData from "../data/confData.js";
 
@@ -34,8 +34,8 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
     >
       <SEO
         title={`${errorCode} - ${errorMessage}`}
-        description="Page not found."
-        keywords="Error, 404, EFAST 2026"
+        description={`Error ${errorCode}: ${errorMessage}. The page you are looking for might have been removed or is temporarily unavailable.`}
+        keywords={`Error ${errorCode}, Page Not Found, EFAST 2026`}
         url={window.location.href}
         image="/EFAST.jpg"
       />
@@ -154,103 +154,6 @@ const ErrorPage = ({ errorCode = 404, errorMessage = "Page Not Found" }) => {
             The page you're looking for has either been redirected or doesn't
             exist in our conference site.
           </motion.p>
-
-          {/* Animated Circuit Diagram */}
-          {/* <motion.div
-            className="my-12 flex justify-center"
-            variants={itemVariants}
-          >
-            <svg
-              width="300"
-              height="120"
-              viewBox="0 0 300 120"
-              className={theme === "light" ? "text-blue-600" : "text-cyan-400"}
-            >
-             
-              <motion.path
-                d="M20,60 L80,60 L80,30 L180,30 L180,90 L280,90"
-                stroke="currentColor"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2, delay: 1 }}
-              />
-
-          
-              <motion.g
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2.5 }}
-              >
-                <line
-                  x1="140"
-                  y1="30"
-                  x2="160"
-                  y2="30"
-                  stroke="red"
-                  strokeWidth="4"
-                />
-                <motion.g
-                  animate={{ x: [-5, 5, -5] }}
-                  transition={{ duration: 0.5, repeat: Infinity }}
-                >
-                  <circle cx="150" cy="30" r="3" fill="red" />
-                </motion.g>
-              </motion.g>
-
-             
-              <motion.circle
-                cx="80"
-                cy="60"
-                r="4"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 1.2 }}
-              />
-              <motion.circle
-                cx="180"
-                cy="30"
-                r="4"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 1.4 }}
-              />
-              <motion.circle
-                cx="180"
-                cy="90"
-                r="4"
-                fill="currentColor"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 1.6 }}
-              />
-
-              <motion.g
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2 }}
-              >
-                <motion.path
-                  d="M20,55 L20,65"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
-                <motion.path
-                  d="M280,85 L280,95"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
-                />
-              </motion.g>
-            </svg>
-          </motion.div> */}
 
           {/* Conference Info */}
           <motion.div
